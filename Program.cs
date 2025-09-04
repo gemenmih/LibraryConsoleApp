@@ -4,63 +4,77 @@ interface IPrintable
     void PrintDetails();
 }
 
-class Book : IPrintable
+public class Book : IPrintable
  
 {
-    public string Title { get; set; }
-    public string Author { get; set; }
-    public int YearOfPublication { get; set; }
+    public string Title { get; set; } 
+    public string Author { get; set; } 
+    //
+    public DateTime YearOfPublication { get;  }
     public bool IsBorrowed { get; set; }
-
-    public Book(string bookTitle = "Aknown", string bookAuthor = "Aknown", int yearOfPub = 0, bool bookIsBorrroed = false)
+    /* Constructor */
+    // Note: In order to provide DateTime-Timestamp like here in the example where you want only the Year
+    // use DateTime data type see for further details Documentation: https://learn.microsoft.com/en-us/dotnet/api/system.datetime?view=net-9.0
+    public Book(string bookTitle = "Aknown", string bookAuthor = "Aknown", int yearOfPublication = default, bool bookIsBorrroed = false)
     {
         Title = bookTitle;
         Author = bookAuthor;
-        YearOfPublication = yearOfPub;
+        YearOfPublication = new DateTime(yearOfPublication);
         IsBorrowed = bookIsBorrroed;
     }
     
     public void PrintDetails()
     {
-    string isAvailable = IsBorrowed ? "NO" : "YES";
-    Console.WriteLine($"Tittle: {Title}\t Author: {Author}\t Year: {YearOfPublication}\t Available: {isAvailable}");
+        string isAvailable = IsBorrowed ? "NO" : "YES";
+        Console.WriteLine($"Tittle: {Title}\t Author: {Author}\t Year: {YearOfPublication}\t Available: {isAvailable}");
     }
 }
 
-class Library
+public class Library
 {
-    private static List<Book> All_the_books = null;
+    //Note: In c# or in Java see the documentation for naming conventions
+    private List<Book> AllTheBooks = new List<Book>(); 
 
-    public static void Initial_collection()
+    /* Constructor */
+    public Library()
     {
-        List<Book> collection_of_books = new List<Book>();
-        collection_of_books.Add(new Book("1984", "George Orwell", 1949));
-        collection_of_books.Add(new Book("To Kill a Mockingbird", "Harper Lee", 1960));
-        collection_of_books.Add(new Book("Pride and Prejudice", "Jane Austen", 1813));
-        collection_of_books.Add(new Book("The Great Gatsby", "F. Scott Fitzgerald", 1925));
-        collection_of_books.Add(new Book("Beloved", "Toni Morrison", 1987));
-        collection_of_books.Add(new Book("The Catcher in the Rye", "J.D. Salinger", 1951));
-        collection_of_books.Add(new Book("One Hundred Years of Solitude", "Gabriel García Márquez", 1967));
-        collection_of_books.Add(new Book("The Road", "Cormac McCarthy", 2006));
-        collection_of_books.Add(new Book("The Name of the Wind", "Patrick Rothfuss", 2007));
-        collection_of_books.Add(new Book("Sapiens: A Brief History of Humankind", "Yuval Noah Harari", 2011));
-        Library.All_the_books = collection_of_books;
+        AllTheBooks = Initialization();
+    }
+    
+
+    public List<Book> Initialization()
+    {
+        List<Book> BookCollection = new List<Book>();
+        BookCollection.Add(new Book("1984", "George Orwell", 1949));
+        BookCollection.Add(new Book("To Kill a Mockingbird", "Harper Lee", 1960));
+        BookCollection.Add(new Book("Pride and Prejudice", "Jane Austen", 1813));
+        BookCollection.Add(new Book("The Great Gatsby", "F. Scott Fitzgerald", 1925));
+        BookCollection.Add(new Book("Beloved", "Toni Morrison", 1987));
+        BookCollection.Add(new Book("The Catcher in the Rye", "J.D. Salinger", 1951));
+        BookCollection.Add(new Book("One Hundred Years of Solitude", "Gabriel García Márquez", 1967));
+        BookCollection.Add(new Book("The Road", "Cormac McCarthy", 2006));
+        BookCollection.Add(new Book("The Name of the Wind", "Patrick Rothfuss", 2007));
+        BookCollection.Add(new Book("Sapiens: A Brief History of Humankind", "Yuval Noah Harari", 2011));
+
+        return BookCollection;
     }
 
-    // Add a book
-    public static void Add_book(Book the_book_to_add)
+    //Note: Redundant comment because you use a nice and undestandable method name
+    //Note: The static is not needed here
+    public void AddBook(Book book)
     {
 
-        All_the_books.Add(the_book_to_add);
+        AllTheBooks.Add(book);
         Console.WriteLine("The book is added!");
     }
 
-    // List the books
-    public static void Display_list_of_book()
+    //Note: Redundant comment because you use a nice and undestandable method name
+    //Note: The static is not needed here
+    public void DisplayListOfBooks()
     {
-        if (All_the_books != null)
+        if (AllTheBooks != null)
         {
-            foreach (Book book in All_the_books)
+            foreach (Book book in AllTheBooks)
             {
                 book.PrintDetails();
             }
@@ -70,15 +84,15 @@ class Library
             Console.WriteLine("The Library is currently empty!");
         }
     }
-
-    // Search a book
-    public static void Search_book(string bookTitle)
+    //Note: Redundant comment because you use a nice and undestandable method name
+    //Note: The static is not needed here
+    public void SearchBook(string bookTitle)
     {
-        if (All_the_books != null)
+        if (AllTheBooks != null)
         {
-            if (All_the_books.Any(Book => Book.Title == bookTitle))
+            if (AllTheBooks.Any(Book => Book.Title == bookTitle))
             {
-                string message = !All_the_books.Find(Book => Book.Title == bookTitle).IsBorrowed ? "is" : "is not";
+                string message = !AllTheBooks.Find(Book => Book.Title == bookTitle).IsBorrowed ? "is" : "is not";
                 Console.WriteLine($"The book: {bookTitle} exist and {message} currently available!");
             }
             else
@@ -87,21 +101,21 @@ class Library
             }
         }
     }
-
-    //Borrow a book
-    public static void Borrow_book(string bookTitle)
+    //Note: Redundant comment because you use a nice and undestandable method name
+    //Note: The static is not needed here
+    public void BorrowBook(string bookTitle)
     {
-        if (All_the_books != null)
+        if (AllTheBooks != null)
         {
-            if (All_the_books.Any(Book => Book.Title == bookTitle))
+            if (AllTheBooks.Any(Book => Book.Title == bookTitle))
             {
-                if (All_the_books.Find(Book => Book.Title == bookTitle).IsBorrowed)
+                if (AllTheBooks.Find(Book => Book.Title == bookTitle).IsBorrowed)
                 {
                     Console.WriteLine($"Sorry, the book: {bookTitle} is currently rented!");
                 }
                 else
                 {
-                    All_the_books.Find(Book => Book.Title == bookTitle).IsBorrowed = true;
+                    AllTheBooks.Find(Book => Book.Title == bookTitle).IsBorrowed = true;
                     Console.WriteLine($"Successful borrowing of book: {bookTitle}. Happy reading!");
                 }
             }
@@ -111,17 +125,18 @@ class Library
             }
         }
     }
+    //Note: Redundant comment because you use a nice and undestandable method name
+    //Note: The static is not needed here
 
-    //Return a book
-    public static void Return_book(string bookTitle)
+    public void ReturnBook(string bookTitle)
     {
-        if (All_the_books != null)
+        if (AllTheBooks != null)
         {
-            if (All_the_books.Any(Book => Book.Title == bookTitle))
+            if (AllTheBooks.Any(Book => Book.Title == bookTitle))
             {
-                if (All_the_books.Find(Book => Book.Title == bookTitle).IsBorrowed == true)
+                if (AllTheBooks.Find(Book => Book.Title == bookTitle).IsBorrowed == true)
                 {
-                    All_the_books.Find(Book => Book.Title == bookTitle).IsBorrowed = false;
+                    AllTheBooks.Find(Book => Book.Title == bookTitle).IsBorrowed = false;
                     Console.WriteLine($"Successful return of the book: {bookTitle}!");
                 }
                 else Console.WriteLine("Something went wrong. The book is already available for borrowing");
@@ -136,13 +151,16 @@ class Program
 {
     static void Main(string[] args)
     {
-        Library.Initial_collection();
-        int[] mychoices = { 1, 2, 3, 4, 5 };
-        int user_choice;
+        //Note: First create an instance of the Library class always make use of the Constructor
+        //Note: The AlltheBooks variable has already been Initialized in the Constructor
+        Library library = new Library();
+        //Note: PascalCase for naming conventions
+        int[] myChoices = { 1, 2, 3, 4, 5 };
+        int userChoice;
 
         do
         {
-            user_choice = 0;
+            userChoice = 0;
             bool valid_int_choice = false;
             //Console.Clear();
             Console.WriteLine("===== Library's Menu =====");
@@ -160,11 +178,11 @@ class Program
                 {
                     Console.Write("Option (1-5): ");
                     string input = Console.ReadLine();
-                    if (!int.TryParse(input, out user_choice))
+                    if (!int.TryParse(input, out userChoice))
                     {
                         throw new FormatException("The option has to be an integer.");
                     }
-                    if (!mychoices.Contains(user_choice))
+                    if (!myChoices.Contains(userChoice))
                     {
                         throw new ArgumentOutOfRangeException("The option has to be between 1 and 5.");
                     }
@@ -180,35 +198,26 @@ class Program
                 }
             }
 
-            switch (user_choice)
+            switch (userChoice)
             {
                 case 1:
-                    {
-                        Console.Clear();
-                        Console.WriteLine("List of books:");
-                        Library.Display_list_of_book();
-                    }
+                    Console.WriteLine("List of books:");
+                    library.DisplayListOfBooks();
                     break;
                 case 2:
-                    {
-                        Console.WriteLine("");
-                        Console.Write("Type the book's title that you want to search: ");
-                        Library.Search_book(Console.ReadLine());
-                    }
+                    Console.WriteLine("");
+                    Console.Write("Type the book's title that you want to search: ");
+                    library.SearchBook(Console.ReadLine());
                     break;
                 case 3:
-                    {
-                        Console.WriteLine("");
-                        Console.Write("Type the book's title that you want to search: ");
-                        Library.Borrow_book(Console.ReadLine());
-                    }
+                    Console.WriteLine("");
+                    Console.Write("Type the book's title that you want to search: ");
+                    library.BorrowBook(Console.ReadLine());
                     break;
                 case 4:
-                    {
-                        Console.WriteLine("");
-                        Console.Write("Type the book's title that you want to search: ");
-                        Library.Return_book(Console.ReadLine());
-                    }
+                    Console.WriteLine("");
+                    Console.Write("Type the book's title that you want to search: ");
+                    library.ReturnBook(Console.ReadLine());
                     break;
                 case 5:
                     Console.WriteLine("");
@@ -217,7 +226,7 @@ class Program
             }
 
         }
-        while (user_choice != 5);
+        while (userChoice != 5);
 
     }
 }

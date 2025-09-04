@@ -1,0 +1,10 @@
+1. Create a new branch
+2. Pull the latest changes in your new branch from the branch: Optimizations-Fixes
+3. Create in the Models Folder the Boook and Library Class
+4. Create the interface IPrintable in Interfaces folder
+5. In the Services Folder Create a Generic class where it will handle   
+    a. Getting and Displaying all the Information
+    b. Adding a new item in the Collection
+    c. Searching for an item in the Collection
+    d. Update an item from the Collection
+    e. Remove an item from the Collection

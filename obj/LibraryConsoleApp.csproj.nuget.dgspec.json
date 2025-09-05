@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gemen\\Desktop\\LibraryConsoleApp\\LibraryConsoleApp\\LibraryConsoleApp.csproj": {}
+    "C:\\Users\\gemen\\Documents\\GitHub\\LibraryConsoleApp\\LibraryConsoleApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gemen\\Desktop\\LibraryConsoleApp\\LibraryConsoleApp\\LibraryConsoleApp.csproj": {
+    "C:\\Users\\gemen\\Documents\\GitHub\\LibraryConsoleApp\\LibraryConsoleApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gemen\\Desktop\\LibraryConsoleApp\\LibraryConsoleApp\\LibraryConsoleApp.csproj",
+        "projectUniqueName": "C:\\Users\\gemen\\Documents\\GitHub\\LibraryConsoleApp\\LibraryConsoleApp.csproj",
         "projectName": "LibraryConsoleApp",
-        "projectPath": "C:\\Users\\gemen\\Desktop\\LibraryConsoleApp\\LibraryConsoleApp\\LibraryConsoleApp.csproj",
+        "projectPath": "C:\\Users\\gemen\\Documents\\GitHub\\LibraryConsoleApp\\LibraryConsoleApp.csproj",
         "packagesPath": "C:\\Users\\gemen\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gemen\\Desktop\\LibraryConsoleApp\\LibraryConsoleApp\\obj\\",
+        "outputPath": "C:\\Users\\gemen\\Documents\\GitHub\\LibraryConsoleApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gemen\\AppData\\Roaming\\NuGet\\NuGet.Config"
